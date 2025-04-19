@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import logo from '../Assets/aryanlogo .png';
+import happy from '../Assets/happy.svg';
+import sad from '../Assets/sad.svg';
+import smile from '../Assets/smiling.svg';
+import emo from '../Assets/emoless.svg';
 
-const emojiOptions = [
-  { label: "😍 Super", value: "super" },
-  { label: "😊 Good", value: "good" },
-  { label: "😐 Average", value: "average" },
-  { label: "😞 Bad", value: "bad" },
-];
+const ratingOptions = ["Excellent", "Good", "Average", "Bad"];
+const svgOptions = [smile, happy, emo, sad];
 
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({
@@ -51,66 +52,80 @@ const FeedbackForm = () => {
     console.log("Submitted Feedback:", formData);
   };
 
-  const renderEmojiRadios = (section, key) => (
-    <div className="flex gap-4 mt-2">
-      {emojiOptions.map((option) => {
-        const isSelected = formData[section][key] === option.value;
-        return (
-          <button
-            type="button"
-            key={option.value}
-            onClick={() => handleRadioChange(section, key, option.value)}
-            className={`flex flex-col items-center justify-center px-4 py-2 rounded-lg border ${
-              isSelected ? "border-orange-600 bg-orange-100 ring-2 ring-orange-500" : "border-gray-300"
-            } hover:bg-orange-50 transition`}
-          >
-            <span className="text-2xl">{option.label.split(" ")[0]}</span>
-            <span className="text-sm mt-1">{option.label.split(" ")[1]}</span>
-          </button>
-        );
-      })}
+  const renderRatingGrid = (section, questions) => (
+    <div className="w-full space-y-4 mt-4">
+      {/* Header Row: Rating labels and emojis */}
+      <div className="flex  w-full ">
+      <div className="text-base font-semibold text-[#4A3AFF] mb-2 !w-[37%] flex-shrink-0">{section === 'food' ? '- Rate Our Food' : '- Rate Our Service'}</div>
+      <div className="flex gap-4 ">
+        {ratingOptions.map((label, i) => (
+          <div key={label} className="flex flex-col items-center w-16">
+            <span className="text-sm font-semibold text-gray-700">{label}</span>
+            <img src={svgOptions[i]} alt={label} className="w-6 h-6 mt-1" />
+          </div>
+        ))}
+      </div>
+
+      </div>
+
+
+      {/* Question Rows */}
+      
+      {questions.map((key) => (
+        <div key={key} className="flex items-center gap-4">
+          <div className="w-[37%] text-sm font-medium text-gray-800 capitalize flex-shrink-0">
+            {key === "taste"
+              ? "Quality Taste"
+              : key === "friendliness"
+              ? "Staff"
+              : key === "knowledge"
+              ? "Product Knowledge"
+              : key}
+          </div>
+
+          <div className=" flex gap-4  ">
+          {ratingOptions.map((option) => (
+            <div key={option} className="w-16 pl-[10px] flex justify-">
+              <input
+                type="radio"
+                name={`${section}-${key}`}
+                value={option}
+                checked={formData[section][key] === option}
+                onChange={() => handleRadioChange(section, key, option)}
+                className="accent-orange-600"
+              />
+            </div>
+          ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
-  
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg space-y-6">
-      <h2 className="text-center text-2xl font-bold text-orange-600">aryan</h2>
-      <p className="text-center text-gray-700">We welcome your feedback</p>
+    <form
+      onSubmit={handleSubmit}
+      style={{ boxShadow: '1px 4px 104px 0px rgba(20,20,43,0.11)' }}
+      className="sm:max-w-[560px] mx-auto p-6 bg-white rounded-[18px] py-10 space-y-8 flex flex-col items-center"
+    >
+      <img src={logo} alt="Logo" className="w-32 aspect-square" />
+      <p className="text-center text-gray-700 text-3xl font-semibold font-sans w-[80%]">
+        Fill the form to submit your feedback
+      </p>
 
-      {/* Food Section */}
-        <div className="bg-orange-50 p-4 rounded-lg shadow">
-        <h3 className="text-lg font-semibold text-orange-700 mb-4">Rate Our Food</h3>
-        <div className="space-y-6">
-            {["taste", "quantity", "presentation"].map((key) => (
-            <div key={key}>
-                <label className="block text-sm font-medium text-gray-700 capitalize">
-                {key === "taste" ? "Quality Taste" : key}
-                </label>
-                {renderEmojiRadios("food", key)}
-            </div>
-            ))}
-        </div>
-        </div>
-            
-        {/* Service Section */}
-        <div className="bg-orange-50 p-4 rounded-lg shadow">
-        <h3 className="text-lg font-semibold text-orange-700 mb-4">Rate Our Service</h3>
-        <div className="space-y-6">
-            {["courtesy", "friendliness", "cleanliness", "knowledge"].map((key) => (
-            <div key={key}>
-                <label className="block text-sm font-medium text-gray-700 capitalize">
-                {key === "friendliness" ? "Staff Friendliness" :
-                    key === "knowledge" ? "Product Knowledge" : key}
-                </label>
-                {renderEmojiRadios("service", key)}
-            </div>
-            ))}
-        </div>
-        </div>
+      {/* Rate Our Food */}
+      <div className="p-4 border-t-[1px] border-gray-200 w-[95%]">
+        {renderRatingGrid("food", ["taste", "quantity", "presentation"])}
+      </div>
+
+      {/* Rate Our Service */}
+      <div className="p-4  border-y-[1px] py-8  w-[95%]">
+        {/* <h3 className="text-lg font-semibold text-orange-700 mb-2">Rate Our Service</h3> */}
+        {renderRatingGrid("service", ["courtesy", "friendliness", "cleanliness", "knowledge"])}
+      </div>
 
       {/* Manager Interaction */}
-      <div>
+      <div className="w-full">
         <label className="block font-medium mb-1">Did our manager interact with you?</label>
         <div className="flex gap-4">
           {["Yes", "No"].map((val) => (
@@ -129,7 +144,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Additional Comments */}
-      <div>
+      <div className="w-full">
         <label className="block font-medium mb-1">Any additional comments?</label>
         <textarea
           className="w-full p-2 border rounded"
@@ -140,7 +155,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Referral Question */}
-      <div>
+      <div className="w-full">
         <label className="block font-medium mb-1">Would you refer us to a friend?</label>
         <div className="flex gap-4">
           {["Yes", "No", "Maybe"].map((val) => (
@@ -159,7 +174,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Personal Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
         <input
           type="text"
           placeholder="Name"
