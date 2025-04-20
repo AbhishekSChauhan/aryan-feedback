@@ -175,27 +175,38 @@ const FeedbackForm = () => {
       {/* Manager Interaction */}
       <div className="w-[95%]">
         <label className="block font-medium mb-1">Did our manager interact with you?</label>
-        <div className="flex gap-4">
-          {["Yes", "No"].map((val) => (
-            <label key={val} className="flex items-center gap-1">
-              <input
-                type="radio"
-                name="managerInteraction"
-                value={val}
-                checked={formData.managerInteraction === val}
-                onChange={() => handleChange("managerInteraction", val)}
-              />
-              {val}
-            </label>
-          ))}
+        <div className="flex gap-4 mt-4">
+          {["Yes", "No"].map((val) => {
+            const inputId = `managerInteraction-${val}`;
+            return (
+              <div key={val} className="radio-buttons-container">
+                <div className="radio-button">
+                  <input
+                    type="radio"
+                    id={inputId}
+                    name="managerInteraction"
+                    value={val}
+                    checked={formData.managerInteraction === val}
+                    onChange={() => handleChange("managerInteraction", val)}
+                    className="radio-button__input"
+                  />
+                  <label htmlFor={inputId} className="radio-button__label">
+                    <span className="radio-button__custom"></span>
+                    <span className="ml-1 font-semibold">{val}</span>
+                  </label>
+                </div>
+              </div>
+            );
+          })}
         </div>
+
       </div>
 
       {/* Additional Comments */}
       <div className="w-[95%]">
         <label className="block font-medium mb-1">Any additional comments?</label>
         <textarea
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded-[4px] mt-4 outline-none focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1px] focus:border-[#4A3AFF]"
           rows="3"
           value={formData.additionalComments}
           onChange={(e) => handleChange("additionalComments", e.target.value)}
@@ -205,7 +216,7 @@ const FeedbackForm = () => {
       {/* Referral Question */}
       <div className="w-[95%]">
         <label className="block font-medium mb-1">Would you refer us to a friend?</label>
-        <div className="flex gap-4">
+        {/* <div className="flex gap-4">
           {["Yes", "No", "Maybe"].map((val) => (
             <label key={val} className="flex items-center gap-1">
               <input
@@ -218,7 +229,33 @@ const FeedbackForm = () => {
               {val}
             </label>
           ))}
-        </div>
+        </div> */}
+
+      <div className="flex gap-4 mt-4">
+        {["Yes", "No", "Maybe"].map((val, index) => {
+          const inputId = `referToFriend-${val}`;
+          return (
+            <div key={val} className="radio-buttons-container">
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  id={inputId}
+                  name="referToFriend"
+                  value={val}
+                  checked={formData.referToFriend === val}
+                  onChange={() => handleChange("referToFriend", val)}
+                  className="radio-button__input"
+                />
+                <label htmlFor={inputId} className="radio-button__label">
+                  <span className="radio-button__custom"></span>
+                  <span className="ml-1 font-semibold">{val}</span>
+                </label>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
       </div>
 
       {/* Personal Info */}
