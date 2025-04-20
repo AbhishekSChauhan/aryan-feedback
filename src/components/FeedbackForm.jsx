@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import logo from '../Assets/aryanlogo .png';
 import happy from '../Assets/happy.svg';
 import sad from '../Assets/sad.svg';
 import smile from '../Assets/smiling.svg';
 import emo from '../Assets/emoless.svg';
+import '../App.css';
 
 const ratingOptions = ["Excellent", "Good", "Average", "Bad"];
 const svgOptions = [smile, happy, emo, sad];
@@ -52,10 +54,38 @@ const FeedbackForm = () => {
     console.log("Submitted Feedback:", formData);
   };
 
+  const renderCustomRadios = (section, key) => (
+    <div className="flex gap-4">
+      {ratingOptions.map((option, index) => {
+        const inputId = `${section}-${key}-${option}`;
+        return (
+          <div key={option} className="w-20 flex justify-center">
+            <div className="radio-buttons-container">
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  id={inputId}
+                  name={`${section}-${key}`}
+                  value={option}
+                  checked={formData[section][key] === option}
+                  onChange={() => handleRadioChange(section, key, option)}
+                  className="radio-button__input"
+                />
+                <label htmlFor={inputId} className="radio-button__label">
+                  <span className="radio-button__custom"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+
   const renderRatingGrid = (section, questions) => (
     <div className="w-full space-y-4 mt-4">
       {/* Header Row: Rating labels and emojis */}
-      <div className="flex  w-full ">
+      <div className="flex  w-full  mb-9">
       <div className="text-base font-semibold text-[#4A3AFF] mb-2 !w-[37%] flex-shrink-0">{section === 'food' ? '- Rate Our Food' : '- Rate Our Service'}</div>
       <div className="flex gap-4 ">
         {ratingOptions.map((label, i) => (
@@ -72,28 +102,46 @@ const FeedbackForm = () => {
       {/* Question Rows */}
       
       {questions.map((key) => (
-        <div key={key} className="flex items-center gap-4">
+        <div key={key} className="flex items-center gap-4 ">
           <div className="w-[37%] text-sm font-medium text-gray-800 capitalize flex-shrink-0">
             {key === "taste"
               ? "Quality Taste"
               : key === "friendliness"
               ? "Staff"
               : key === "knowledge"
-              ? "Product Knowledge"
+              ? "Overall Service"
               : key}
           </div>
 
           <div className=" flex gap-4  ">
           {ratingOptions.map((option) => (
-            <div key={option} className="w-16 pl-[10px] flex justify-">
-              <input
+            <div key={option} className="w-16 pl-[7px] flex justify-">
+              {/* <input
                 type="radio"
                 name={`${section}-${key}`}
                 value={option}
                 checked={formData[section][key] === option}
                 onChange={() => handleRadioChange(section, key, option)}
                 className="accent-orange-600"
-              />
+              /> */}
+              
+              <div className="radio-buttons-container">
+              <div className="radio-button">
+                <input
+                  type="radio"
+                  id={`${section}-${key}-${option}`}
+                  name={`${section}-${key}`}
+                  value={option}
+                  checked={formData[section][key] === option}
+                  onChange={() => handleRadioChange(section, key, option)}
+                  className="radio-button__input"
+                />
+                <label htmlFor={`${section}-${key}-${option}`} className="radio-button__label">
+                  <span className="radio-button__custom"></span>
+                </label>
+              </div>
+            </div>
+              {/* {renderCustomRadios(section, key)} */}
             </div>
           ))}
           </div>
@@ -125,7 +173,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Manager Interaction */}
-      <div className="w-full">
+      <div className="w-[95%]">
         <label className="block font-medium mb-1">Did our manager interact with you?</label>
         <div className="flex gap-4">
           {["Yes", "No"].map((val) => (
@@ -144,7 +192,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Additional Comments */}
-      <div className="w-full">
+      <div className="w-[95%]">
         <label className="block font-medium mb-1">Any additional comments?</label>
         <textarea
           className="w-full p-2 border rounded"
@@ -155,7 +203,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Referral Question */}
-      <div className="w-full">
+      <div className="w-[95%]">
         <label className="block font-medium mb-1">Would you refer us to a friend?</label>
         <div className="flex gap-4">
           {["Yes", "No", "Maybe"].map((val) => (
