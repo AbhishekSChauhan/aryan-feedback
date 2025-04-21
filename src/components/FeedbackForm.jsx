@@ -157,8 +157,8 @@ const FeedbackForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ boxShadow: '1px 4px 104px 0px rgba(20,20,43,0.11)' }}
-      className="w-full sm:max-w-[560px] sm:mx-auto p-6 bg-white sm:rounded-[18px] py-10 space-y-8 flex flex-col items-center"
+      // style={{ boxShadow: '1px 4px 104px 0px rgba(20,20,43,0.11)' }}
+      className="w-full sm:max-w-[560px] sm:mx-auto p-6 bg-white sm:rounded-[18px] sm:custom-shadow py-10 space-y-8 flex flex-col items-center"
     >
       <img src={logo} alt="Logo" className="w-32 aspect-square" />
       <p className="text-center text-gray-700 text-2xl sm:text-3xl font-semibold font-sans w-[80%]">

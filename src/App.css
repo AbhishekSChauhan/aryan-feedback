@@ -1,3 +1,8 @@
+.custom-shadow{
+    box-shadow: 1px 4px 104px 0px rgba(20,20,43,0.11);
+}
+
+
 .radio-buttons-container {
     display: flex;
     align-items: center;
