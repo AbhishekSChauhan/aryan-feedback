@@ -119,7 +119,7 @@ const FeedbackForm = () => {
 
           <div className=" flex gap-5 sm:gap-4  items-center ">
           {ratingOptions.map((option) => (
-            <div key={option} className="w-max sm:w-16 pl-[7px] flex justify-">
+            <div key={option} className="w-10 sm:w-16 sm:pl-[7px] flex justify-">
               {/* <input
                 type="radio"
                 name={`${section}-${key}`}
@@ -309,23 +309,23 @@ const FeedbackForm = () => {
         />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-full">
         <div className="font-semibold text-[15px] ml-2">Date of Birth</div>
         <input
           type="date"
           placeholder="DOB"
-          className="outline-none px-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
+          className="outline-none px-3 w-full placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
           value={formData.dob}
           onChange={(e) => handleChange("dob", e.target.value)}
         />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-full">
           <div className="font-semibold text-[15px] ml-2">Anniversary</div>
           <input
             type="date"
             placeholder="Date of Anniversary"
-            className="outline-none px-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
+            className="outline-none px-3 w-full placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
             value={formData.anniversary}
             onChange={(e) => handleChange("anniversary", e.target.value)}
           />
