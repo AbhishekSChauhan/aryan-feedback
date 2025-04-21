@@ -6,6 +6,7 @@ import sad from '../Assets/sad.svg';
 import smile from '../Assets/smiling.svg';
 import emo from '../Assets/emoless.svg';
 import '../App.css';
+import StarRating from "./StarRating"; 
 
 const ratingOptions = ["Excellent", "Good", "Average", "Bad"];
 const svgOptions = [smile, happy, emo, sad];
@@ -258,41 +259,78 @@ const FeedbackForm = () => {
 
       </div>
 
+
+
+      <div className="w-[95%]">
+        <label className="block font-medium mb-1">Rate your overall experience</label>
+        <StarRating
+          name="overallRating"
+          onChange={(value) => setFormData((prev) => ({ ...prev, overallRating: value }))}
+        />
+      </div>
+
+
       {/* Personal Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+        <div className="flex flex-col gap-2 ">
+          <div className="font-semibold text-[15px] ml-2">Name</div>
+          <div>
+            <input
+              type="text"
+              placeholder="Name"
+              className="outline-none  w-full pl-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+            />
+        </div>
+        </div>
+        <div className="flex flex-col gap-2">
+        <div className="font-semibold text-[15px] ml-2">Email</div>
         <input
           type="text"
-          placeholder="Name"
-          className="p-2 border rounded"
-          value={formData.name}
-          onChange={(e) => handleChange("name", e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Phone & Email"
-          className="p-2 border rounded"
+          placeholder="Email"
+          className="outline-none pl-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
           value={formData.contact}
           onChange={(e) => handleChange("contact", e.target.value)}
         />
+        </div>
+
+        <div className="flex flex-col gap-2">
+        <div className="font-semibold text-[15px] ml-2">Phone</div>
+        <input
+          type="text"
+          placeholder="Phone number"
+          className="outline-none pl-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
+          value={formData.contact}
+          onChange={(e) => handleChange("contact", e.target.value)}
+        />
+        </div>
+
+        <div className="flex flex-col gap-2">
+        <div className="font-semibold text-[15px] ml-2">Date of Birth</div>
         <input
           type="date"
-          placeholder="Date of Birth"
-          className="p-2 border rounded"
+          placeholder="DOB"
+          className="outline-none px-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
           value={formData.dob}
           onChange={(e) => handleChange("dob", e.target.value)}
         />
-        <input
+        </div>
+
+
+        {/* <input
           type="date"
           placeholder="Date of Anniversary"
           className="p-2 border rounded"
           value={formData.anniversary}
           onChange={(e) => handleChange("anniversary", e.target.value)}
-        />
+        /> */}
       </div>
 
       <button
         type="submit"
-        className="w-full bg-orange-600 text-white font-semibold py-2 rounded hover:bg-orange-700 transition"
+        style={{ boxShadow: ' 0px 3px 22px 0px rgba(74,58,255,0.25)'}}
+        className="self-start h-[55px] text-white font-semibold px-5 rounded-full text-sm tracking-wide bg-[#4A3AFF] transition-all"
       >
         Submit Feedback
       </button>
