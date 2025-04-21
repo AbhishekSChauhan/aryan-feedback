@@ -3,7 +3,7 @@
     flex-direction: row-reverse;
     justify-content: start;
     gap: 10px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
   
   .radio > input {
@@ -20,7 +20,7 @@
   }
   
   .radio > label > svg {
-    fill: #6666667c;
+    fill: #7473737c;
     transition: fill 0.3s ease;
   }
   
@@ -28,8 +28,8 @@
   .radio > label::after {
     content: "";
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     background-color: #ff9e0b;
     border-radius: 50%;
     opacity: 0;
@@ -65,7 +65,7 @@
   
   .radio > label:hover > svg {
     fill: #ff9e0b;
-    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+    filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.9));
     animation: shimmer 1s ease infinite alternate;
   }
   

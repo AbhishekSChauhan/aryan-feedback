@@ -5,7 +5,8 @@
   }
   
   .radio-button {
-    display: inline-block;
+    display: flex;
+    width: max-content;
     position: relative;
     cursor: pointer;
   }

@@ -29,6 +29,7 @@ const FeedbackForm = () => {
     referToFriend: "",
     name: "",
     contact: "",
+    phone: "",
     dob: "",
     anniversary: "",
   });
@@ -84,14 +85,16 @@ const FeedbackForm = () => {
   );
 
   const renderRatingGrid = (section, questions) => (
-    <div className="w-full space-y-4 mt-4">
+    <div className="w-full space-y-4 mt-6 sm:mt-4">
       {/* Header Row: Rating labels and emojis */}
-      <div className="flex  w-full  mb-9">
-      <div className="text-base font-semibold text-[#4A3AFF] mb-2 !w-[37%] flex-shrink-0">{section === 'food' ? '- Rate Our Food' : '- Rate Our Service'}</div>
-      <div className="flex gap-4 ">
+      <div className="flex items-center w-full  mb-9">
+      <div className="hidden sm:flex  text-base font-semibold text-[#4A3AFF] mb-2 sm:!w-[37%] flex-shrink-0">{section === 'food' ? '- Rate Our Food' : '- Rate Our Service'}</div>
+      <div className="sm:hidden text-sm font-semibold text-[#4A3AFF] !w-[37%] flex-shrink-0 my-3">{section === 'food' ? ' Rate Our Food' : ' Rate Our Service'}</div>
+
+      <div className="flex gap-5 sm:gap-4 ">
         {ratingOptions.map((label, i) => (
-          <div key={label} className="flex flex-col items-center w-16">
-            <span className="text-sm font-semibold text-gray-700">{label}</span>
+          <div key={label} className="flex flex-col items-center w-max sm:w-16">
+            <span className="text-xs sm:text-sm font-semibold text-gray-700">{label}</span>
             <img src={svgOptions[i]} alt={label} className="w-6 h-6 mt-1" />
           </div>
         ))}
@@ -103,8 +106,8 @@ const FeedbackForm = () => {
       {/* Question Rows */}
       
       {questions.map((key) => (
-        <div key={key} className="flex items-center gap-4 ">
-          <div className="w-[37%] text-sm font-medium text-gray-800 capitalize flex-shrink-0">
+        <div key={key} className="flex items-center gap-4 mt-7 sm:mt-0 ">
+          <div className="w-[37%] text-sm font-medium text-gray-800 capitalize pt-[5px] flex-shrink-0">
             {key === "taste"
               ? "Quality Taste"
               : key === "friendliness"
@@ -114,9 +117,9 @@ const FeedbackForm = () => {
               : key}
           </div>
 
-          <div className=" flex gap-4  ">
+          <div className=" flex gap-5 sm:gap-4  items-center ">
           {ratingOptions.map((option) => (
-            <div key={option} className="w-16 pl-[7px] flex justify-">
+            <div key={option} className="w-max sm:w-16 pl-[7px] flex justify-">
               {/* <input
                 type="radio"
                 name={`${section}-${key}`}
@@ -155,26 +158,26 @@ const FeedbackForm = () => {
     <form
       onSubmit={handleSubmit}
       style={{ boxShadow: '1px 4px 104px 0px rgba(20,20,43,0.11)' }}
-      className="sm:max-w-[560px] mx-auto p-6 bg-white rounded-[18px] py-10 space-y-8 flex flex-col items-center"
+      className="w-full sm:max-w-[560px] sm:mx-auto p-6 bg-white sm:rounded-[18px] py-10 space-y-8 flex flex-col items-center"
     >
       <img src={logo} alt="Logo" className="w-32 aspect-square" />
-      <p className="text-center text-gray-700 text-3xl font-semibold font-sans w-[80%]">
+      <p className="text-center text-gray-700 text-2xl sm:text-3xl font-semibold font-sans w-[80%]">
         Fill the form to submit your feedback
       </p>
 
       {/* Rate Our Food */}
-      <div className="p-4 border-t-[1px] border-gray-200 w-[95%]">
+      <div className="sm:p-4 border-t-[1px] border-gray-200 w-full sm:w-[95%]">
         {renderRatingGrid("food", ["taste", "quantity", "presentation"])}
       </div>
 
       {/* Rate Our Service */}
-      <div className="p-4  border-y-[1px] py-8  w-[95%]">
+      <div className="sm:p-4 border-t-[1px] border-gray-200 w-full sm:w-[95%]">
         {/* <h3 className="text-lg font-semibold text-orange-700 mb-2">Rate Our Service</h3> */}
         {renderRatingGrid("service", ["courtesy", "friendliness", "cleanliness", "knowledge"])}
       </div>
 
       {/* Manager Interaction */}
-      <div className="w-[95%]">
+      <div className="w-full sm:w-[95%] !mt-14 sm:mt-0">
         <label className="block font-medium mb-1">Did our manager interact with you?</label>
         <div className="flex gap-4 mt-4">
           {["Yes", "No"].map((val) => {
@@ -204,7 +207,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Additional Comments */}
-      <div className="w-[95%]">
+      <div className="w-full sm:w-[95%]">
         <label className="block font-medium mb-1">Any additional comments?</label>
         <textarea
           className="w-full p-2 border rounded-[4px] mt-4 outline-none focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1px] focus:border-[#4A3AFF]"
@@ -215,7 +218,7 @@ const FeedbackForm = () => {
       </div>
 
       {/* Referral Question */}
-      <div className="w-[95%]">
+      <div className="w-full  sm:w-[95%]">
         <label className="block font-medium mb-1">Would you refer us to a friend?</label>
         {/* <div className="flex gap-4">
           {["Yes", "No", "Maybe"].map((val) => (
@@ -261,7 +264,7 @@ const FeedbackForm = () => {
 
 
 
-      <div className="w-[95%]">
+      <div className="w-full mt-5 sm:mt-0 sm:w-[95%]">
         <label className="block font-medium mb-1">Rate your overall experience</label>
         <StarRating
           name="overallRating"
@@ -301,8 +304,8 @@ const FeedbackForm = () => {
           type="text"
           placeholder="Phone number"
           className="outline-none pl-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
-          value={formData.contact}
-          onChange={(e) => handleChange("contact", e.target.value)}
+          value={formData.phone}
+          onChange={(e) => handleChange("phone", e.target.value)}
         />
         </div>
 
@@ -317,14 +320,16 @@ const FeedbackForm = () => {
         />
         </div>
 
-
-        {/* <input
-          type="date"
-          placeholder="Date of Anniversary"
-          className="p-2 border rounded"
-          value={formData.anniversary}
-          onChange={(e) => handleChange("anniversary", e.target.value)}
-        /> */}
+        <div className="flex flex-col gap-2">
+          <div className="font-semibold text-[15px] ml-2">Anniversary</div>
+          <input
+            type="date"
+            placeholder="Date of Anniversary"
+            className="outline-none px-3 placeholder:text-sm h-[45px] border rounded-full focus:ring-4 focus:ring-[#4A3AFF] focus:ring-opacity-20 focus:border-[1.5px] transition-all delay-200 focus:border-[#4A3AFF]"
+            value={formData.anniversary}
+            onChange={(e) => handleChange("anniversary", e.target.value)}
+          />
+          </div>
       </div>
 
       <button
